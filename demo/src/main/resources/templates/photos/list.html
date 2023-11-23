@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{/fragments/resources :: headResources('photo-list')}"></head>
+<body>
+<nav th:replace="~{/fragments/navbar :: topNavbar('pizzas')}"></nav>
+<div class="container mt-4">
+    <h1 class="mb-4">Lista delle Foto</h1>
+    <div class="text-center">
+        <a class="btn btn-primary my-5" th:href="@{/photos/create}" title="create">Aggiungi Nuova Photo</a>
+    
+    </div>
+    <form th:action="@{/photos}" method="GET" class="w-25 mb-4">
+        <div class="input-group">
+            <!-- input precaricato leggendo il parametro search della request -->
+            <input
+                    type="text"
+                    placeholder="Search by name"
+                    class="form-control" name="search"
+                    th:value="${param.search}"
+            >
+            
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    
+    </form>
+    <div th:if="${photoList.size() > 0}">
+        
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titolo</th>
+                <th>Descrizione</th>
+                <th>URL Immagine</th>
+                <th>Visibile</th>
+                <th>Data Creazione</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="photo : ${photoList}" th:object="${photo}">
+                <td th:text="*{id}">ID</td>
+                <td th:text="*{titolo}">Titolo</td>
+                <td th:text="*{descrizione}">Descrizione</td>
+                <td>
+                    <img class="imgList" th:src="*{urlImage}" alt="">
+                </td>
+                <td th:text="*{visible ? 'Sì' : 'No'}">Visibile</td>
+                <td th:text="*{#temporals.format(createdAt, 'dd-MM-yyyy')}">Data Creazione</td>
+                <td>
+                    <!-- Pulsanti di Azione -->
+                    <div class="d-flex justify-content-around">
+                        <a th:href="@{/photos/show/{id}(id=*{id})}" class="btn btn-info btn-sm">Dettagli</a>
+                        <a th:href="@{/photos/edit/{id}(id=${photo.id})}" class="btn btn-primary btn-sm">Modifica</a>
+                        <a th:href="@{/photos/delete/{id}(id=${photo.id})}" class="btn btn-danger btn-sm">Cancella</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:unless="${photoList.size() > 0}">No results</div>
+</div>
+</body>
+</html>

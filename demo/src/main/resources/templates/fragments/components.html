@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--  VALIDAZIONI E ERRORI PER TYPE NUMBER     -->
+<th:block th:fragment="formField(type, label, fieldName)">
+    <div th:if="${type == 'number'}">
+        <label th:for="${fieldName}" class="form-label" th:text="${label}"></label>
+        <input th:type="${type}" class="form-control" th:id="${fieldName}" th:field="*{__${fieldName}__}"
+               th:errorClass="is-invalid" step="any">
+        <!-- STEP ANY PER IL TIPO NUMBER DA FARE IF    -->
+        <div th:if="${#fields.hasErrors(fieldName)}" class="invalid-feedback">
+            <ul>
+                <li th:each="err : ${#fields.errors(fieldName)}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+    <!-- #################   -->
+    <div class="mb-3" th:if="${type != 'number'}">
+        <label th:for="${fieldName}" class="form-label" th:text="${label}"></label>
+        <input th:type="${type}" class="form-control" th:id="${fieldName}" th:field="*{__${fieldName}__}"
+               th:errorClass="is-invalid">
+        
+        <div th:if="${#fields.hasErrors(fieldName)}" class="invalid-feedback">
+            <ul>
+                <li th:each="err : ${#fields.errors(fieldName)}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+</th:block>
+<div
+        th:fragment="message"
+        th:if="${message !=null}" class="alert text-light alert-success alert-dismissible fade show">
+    <span th:text="${message}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+</body>
+
+</html>
+<!--<label for="nome" class="form-label">Nome</label>-->
+<!--<input type="text" class="form-control" id="nome" th:field="*{nome}" th:errorClass="is-invalid"-->
+<!--       placeholder="Inserisci il nome della pizza">-->
+<!--<div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">-->
+<!--    <ul>-->
+<!--        <li th:each="err : ${#fields.errors('nome')}" th:text="${err}"></li>-->
+<!--    </ul>-->
+<!--</div>-->
