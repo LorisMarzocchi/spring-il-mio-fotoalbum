@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/resources :: headResources('Categories')"></head>
+<head th:insert="~{fragments/resources :: headResources('Categories')}"></head>
 <body>
-<nav th:replace="fragments/navbar :: topNavbar('categories')"></nav>
+<nav th:replace="~{/fragments/navbar :: topNavbar('photos-create')}"></nav>
 <div class="container">
     <!-- message da redirectAttributes -->
-    <div th:replace="fragments/components :: message"></div>
+    
+    <div th:replace="~{fragments/components :: message}"></div>
     <h1>Categories</h1>
     <hr>
     <section>
@@ -16,7 +17,7 @@
                 th:object="${categoryObj}"
         >
             <div class="mb-3"
-                 th:insert="fragments/components :: formField('text', 'Category name', 'name')">
+                 th:insert="~{fragments/components :: formField('text', 'Category name', 'name')}">
             </div>
             <button class="btn btn-primary" type="submit">Add category</button>
         </form>
@@ -25,11 +26,11 @@
         <ul class="list-group list-group-flush">
             <li
                     th:each="category : ${categoryList}"
-                    
+                    th:object="${category}"
                     class="list-group-item"
             >
                 <span th:text="${category.name}"></span>
-                <form th:action="@{/categories/delete/{id}(id=${category.id})}" class="ms-5 d-inline" method="POST">
+                <form th:action="@{categories/delete/{id}(id=*{id})}" class="ms-5 d-inline" method="POST">
                     <input type="hidden" name="id" th:value="${category.id}"/>
                     <button class="btn btn-danger btn-sm" type="submit">Elimina</button>
                 </form>

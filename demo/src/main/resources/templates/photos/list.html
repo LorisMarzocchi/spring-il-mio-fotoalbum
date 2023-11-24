@@ -4,6 +4,7 @@
 <body>
 <nav th:replace="~{/fragments/navbar :: topNavbar('pizzas')}"></nav>
 <div class="container mt-4">
+    <div th:replace="~{fragments/components :: message}"></div>
     <h1 class="mb-4">Lista delle Foto</h1>
     <div class="text-center">
         <a class="btn btn-primary my-5" th:href="@{/photos/create}" title="create">Aggiungi Nuova Photo</a>

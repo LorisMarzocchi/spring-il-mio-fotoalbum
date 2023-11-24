@@ -34,10 +34,10 @@ public class Photo {
     @CreationTimestamp
     private LocalDateTime createdAt;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "photos_categories",
-            joinColumns = @JoinColumn(name = "photos_id"),
-            inverseJoinColumns = @JoinColumn(name = "categories_id"))
+//    @JoinTable(
+//            name = "photos_categories",
+//            joinColumns = @JoinColumn(name = "photos_id"),
+//            inverseJoinColumns = @JoinColumn(name = "categories_id"))
     private List<Category> categories;
 
     public Integer getId() {

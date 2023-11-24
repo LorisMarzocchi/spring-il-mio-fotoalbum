@@ -101,7 +101,7 @@ public class PhotoController {
         try {
             Photo deletedPhoto = photoService.getPhotoById(id);
             photoService.deletePhoto(id);
-            redirectAttributes.addFlashAttribute("deleteMessage", "Photo" + deletedPhoto.getTitolo() + "deleted");
+            redirectAttributes.addFlashAttribute("message", "Photo " + deletedPhoto.getTitolo() + " deleted");
             return "redirect:/photos";
         } catch (PhotoNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

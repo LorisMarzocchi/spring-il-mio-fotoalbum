@@ -1,6 +1,7 @@
 package com.experis.springilmiofotoalbum.controller;
 
 import com.experis.springilmiofotoalbum.exception.CategoryNameUniqueException;
+import com.experis.springilmiofotoalbum.exception.CategoryNotFoundException;
 import com.experis.springilmiofotoalbum.model.Category;
 import com.experis.springilmiofotoalbum.model.Photo;
 import com.experis.springilmiofotoalbum.repository.CategoryRepository;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/categories")
@@ -54,20 +56,24 @@ public class CategoryController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        Category categoryToDelete = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
+    public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            Category categoryToDelete = categoryService.getCategoryById(id);
+            // Rimuovere la categoria da ogni photo associata
+            for (Photo photo : categoryToDelete.getPhotos()) {
+                photo.getCategories().remove(categoryToDelete);
+                // Salva la pizza aggiornata
+                photoRepository.save(photo);
+            }
 
-        // Rimuovere l'ingrediente da ogni pizza associata
-        for (Photo photo : categoryToDelete.getPhotos()) {
-            photo.getCategories().remove(categoryToDelete);
-            // Salva la pizza aggiornata
-            photoRepository.save(photo);
+
+            // Ora è sicuro eliminare la categoria
+            categoryService.deleteCategory(id);
+            redirectAttributes.addFlashAttribute("message", "Categoria " + categoryToDelete.getName() + " deleted");
+            return "redirect:/categories";
+        } catch (CategoryNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
-
-        // Ora è sicuro eliminare l'ingrediente
-        photoRepository.deleteById(id);
-        return "redirect:/categories";
     }
 }
 

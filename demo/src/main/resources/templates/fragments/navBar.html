@@ -15,7 +15,7 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" th:classappend="${area == 'users' ? 'active' : ''}"
-                       th:href="@{/users}">Foto</a>
+                       th:href="@{/users}">User</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:classappend="${area == 'photos' ? 'active' : ''}"
@@ -25,15 +25,15 @@
                     <a class="nav-link" th:classappend="${area == 'categories' ? 'active' : ''}"
                        th:href="@{/categories}">Categorie</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:classappend="${area == 'messages' ? 'active' : ''}"
-                       th:href="@{/categories}">Categorie</a>
-                </li>
+                <!--                <li class="nav-item">-->
+                <!--                    <a class="nav-link" th:classappend="${area == 'messages' ? 'active' : ''}"-->
+                <!--                       th:href="@{/categories}">Categorie</a>-->
+                <!--                </li>-->
             </ul>
             <div class="ms-3 mt-2">
                 <div class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item d-flex justify-content-end">
-                        <a class="nav-link" th:classAppend="${area == 'logout' ? 'active' : ''}"
+                        <a class="btn btn-primary" th:classAppend="${area == 'logout' ? 'active' : ''}"
                            th:href="@{/logout}">Logout
                         </a>
                     </li>

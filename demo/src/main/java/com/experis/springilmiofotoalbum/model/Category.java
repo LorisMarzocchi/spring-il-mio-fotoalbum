@@ -2,6 +2,8 @@ package com.experis.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
     @ManyToMany(mappedBy = "categories")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Photo> photos = new ArrayList<>();
 
     public Integer getId() {
