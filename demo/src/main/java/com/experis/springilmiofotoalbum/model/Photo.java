@@ -33,11 +33,11 @@ public class Photo {
     private boolean visible;
     @CreationTimestamp
     private LocalDateTime createdAt;
-    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
+    //    @JoinTable(
 //            name = "photos_categories",
 //            joinColumns = @JoinColumn(name = "photos_id"),
 //            inverseJoinColumns = @JoinColumn(name = "categories_id"))
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
 
     public Integer getId() {

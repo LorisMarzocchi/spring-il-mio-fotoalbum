@@ -3,9 +3,6 @@ package com.experis.springilmiofotoalbum.controller;
 import com.experis.springilmiofotoalbum.exception.CategoryNameUniqueException;
 import com.experis.springilmiofotoalbum.exception.CategoryNotFoundException;
 import com.experis.springilmiofotoalbum.model.Category;
-import com.experis.springilmiofotoalbum.model.Photo;
-import com.experis.springilmiofotoalbum.repository.CategoryRepository;
-import com.experis.springilmiofotoalbum.repository.PhotoRepository;
 import com.experis.springilmiofotoalbum.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
-    @Autowired
-    CategoryRepository categoryRepository;
-    @Autowired
-    PhotoRepository photoRepository;
+    //    @Autowired
+//    CategoryRepository categoryRepository;
+//    @Autowired
+//    PhotoRepository photoRepository;
 
     @GetMapping
     public String index(Model model) {
@@ -58,18 +55,9 @@ public class CategoryController {
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {
-            Category categoryToDelete = categoryService.getCategoryById(id);
-            // Rimuovere la categoria da ogni photo associata
-            for (Photo photo : categoryToDelete.getPhotos()) {
-                photo.getCategories().remove(categoryToDelete);
-                // Salva la pizza aggiornata
-                photoRepository.save(photo);
-            }
-
-
-            // Ora è sicuro eliminare la categoria
+            // Il servizio gestirà la logica di eliminazione
             categoryService.deleteCategory(id);
-            redirectAttributes.addFlashAttribute("message", "Categoria " + categoryToDelete.getName() + " deleted");
+            redirectAttributes.addFlashAttribute("message", "Categoria eliminata con successo");
             return "redirect:/categories";
         } catch (CategoryNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
