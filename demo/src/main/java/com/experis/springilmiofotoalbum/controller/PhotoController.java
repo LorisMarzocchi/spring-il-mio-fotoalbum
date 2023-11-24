@@ -21,14 +21,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/photos")
 public class PhotoController {
-    //    @Autowired
-//    private PhotoRepository photoRepository;
+
     @Autowired
     private PhotoService photoService;
     @Autowired
     private CategoryService categoryService;
-//    @Autowired
-////    private CategoryRepository categoryRepository;
+
 
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
@@ -36,6 +34,21 @@ public class PhotoController {
         model.addAttribute("photoList", photoList);
         return "photos/list";
     }
+
+//    @GetMapping
+//    public String index(@AuthenticationPrincipal DatabaseUserDetails userDetails, @RequestParam Optional<String> search, Model model) {
+//        User currentUser = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
+//        List<Photo> photoList;
+//
+//        if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
+//            photoList = photoService.getAllPhotos(); // Metodo da implementare nel PhotoService
+//        } else {
+//            photoList = photoService.getPhotosByUser(currentUser); // Metodo da implementare nel PhotoService
+//        }
+//
+//        model.addAttribute("photoList", photoList);
+//        return "photos/list";
+//    }
 
     @GetMapping("/show/{id}")
     public String show(@PathVariable Integer id, Model model) {

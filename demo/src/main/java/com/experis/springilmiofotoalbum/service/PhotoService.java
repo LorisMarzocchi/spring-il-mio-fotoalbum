@@ -16,7 +16,7 @@ public class PhotoService {
 
     public List<Photo> getPhotoSearch(Optional<String> search) {
         if (search.isPresent()) {
-            return photoRepository.findByTitoloContainingIgnoreCase(search.get());
+            return photoRepository.findByTitoloContainingIgnoreCaseOrDescrizioneContaining(search.get(), search.get());
         } else {
             return photoRepository.findAll();
         }

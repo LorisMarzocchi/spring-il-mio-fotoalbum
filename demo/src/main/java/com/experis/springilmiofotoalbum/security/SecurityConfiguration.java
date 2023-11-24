@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/categories").hasAuthority("ADMIN")
                 .requestMatchers("/users").hasAnyAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/photos/**").hasAuthority("ADMIN")
-                .requestMatchers("/photos", "/photos/**").hasAnyAuthority("ADMIN", "USER")
+                .requestMatchers("/photos", "/photos/**").hasAnyAuthority("ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()
                 .and().logout();
