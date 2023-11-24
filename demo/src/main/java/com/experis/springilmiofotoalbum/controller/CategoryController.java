@@ -63,5 +63,6 @@ public class CategoryController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
+
 }
 

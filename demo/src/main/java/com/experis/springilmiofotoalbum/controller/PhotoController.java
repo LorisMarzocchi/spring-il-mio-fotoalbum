@@ -121,4 +121,18 @@ public class PhotoController {
         }
     }
 
+    // visibilità
+    @PostMapping("/toggleVisibility/{id}")
+    public String toggleVisibility(@PathVariable Integer id, Model model) {
+        try {
+            Photo photo = photoService.getPhotoById(id);
+            photo.setVisible(!photo.isVisible());
+            photoService.updatePhoto(photo);
+
+            return "redirect:/photos";
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
+        }
+    }
+
 }

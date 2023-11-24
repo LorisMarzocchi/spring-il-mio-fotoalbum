@@ -15,6 +15,19 @@ const getPhoto = async (searchName = "") => {
     console.error("Error in getPhoto:", error);
   }
 };
+// const getPhoto = async (searchName = "") => {
+//   try {
+//     const url = `${baseUrl}?search=${searchName}&visible=true`;
+//     const response = await axios.get(url);
+//     if (Array.isArray(response.data)) {
+//       renderPhotoList(response.data);
+//     } else {
+//       console.error("Data format is incorrect:", response.data);
+//     }
+//   } catch (error) {
+//     console.error("Error in getPhoto:", error);
+//   }
+// };
 
 // Funzione per la ricerca
 const searchPhoto = () => {

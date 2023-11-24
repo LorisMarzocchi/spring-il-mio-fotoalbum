@@ -20,8 +20,14 @@ public class PhotoRestController {
 
     @GetMapping
     public List<Photo> index(@RequestParam Optional<String> search) {
-        return photoService.getPhotoSearch(search);
+        return photoService.getVisibleFotoList(search);
     }
+//    @GetMapping
+//    public String index(@RequestParam Optional<String> search, Model model) {
+//        model.addAttribute("fotoList", photoService.getVisibleFotoList(search));
+//        model.addAttribute("searchKeyword", search.orElse(""));
+//        return "fotos/index";
+//    }
 
     @GetMapping("/{id}")
     public Photo show(@PathVariable Integer id) {

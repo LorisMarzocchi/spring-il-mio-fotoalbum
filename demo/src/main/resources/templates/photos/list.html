@@ -46,7 +46,24 @@
                 <td>
                     <img class="imgList" th:src="*{urlImage}" alt="">
                 </td>
-                <td th:text="*{visible ? 'Sì' : 'No'}">Visibile</td>
+                <td>
+                    <!--                    <div class="form-check">-->
+                    <!--                        <input class="form-check-input" type="checkbox" th:checked="*{visible}"-->
+                    <!--                               th:id="'flexCheckDefault' + *{id}">-->
+                    <!--                        <label class="form-check-label" th:for="'flexCheckDefault' + *{id}">-->
+                    <!--                            Visibile SI/NO-->
+                    <!--                        </label>-->
+                    <!--                    </div>-->
+                    <form th:action="@{/photos/toggleVisibility/{id}(id=*{id})}" method="post">
+                        <input class="form-check-input" type="checkbox" id="visibilityCheckbox${photo.id}"
+                               th:checked="${photo.visible}" onchange="this.form.submit()"/>
+                        <label class="form-check-label" for="visibilityCheckbox${photo.id}">
+                            Visibile SI/NO
+                        </label>
+                        <input type="hidden" name="_method" value="post"/>
+                    </form>
+                
+                </td>
                 <td th:text="*{#temporals.format(createdAt, 'dd-MM-yyyy')}">Data Creazione</td>
                 <td>
                     <!-- Pulsanti di Azione -->
