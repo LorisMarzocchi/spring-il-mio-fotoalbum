@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/resources :: headResources('Categories')"></head>
+<body>
+<nav th:replace="fragments/navbar :: topNavbar('categories')"></nav>
+<div class="container">
+    <!-- message da redirectAttributes -->
+    <div th:replace="fragments/components :: message"></div>
+    <h1>Categories</h1>
+    <hr>
+    <section>
+        <form
+                id="category-form"
+                th:action="@{/categories}"
+                method="POST"
+                th:object="${categoryObj}"
+        >
+            <div class="mb-3"
+                 th:insert="fragments/components :: formField('text', 'Category name', 'name')">
+            </div>
+            <button class="btn btn-primary" type="submit">Add category</button>
+        </form>
+    </section>
+    <section class="mt-4">
+        <ul class="list-group list-group-flush">
+            <li
+                    th:each="category : ${categoryList}"
+                    
+                    class="list-group-item"
+            >
+                <span th:text="${category.name}"></span>
+                <form th:action="@{/categories/delete/{id}(id=${category.id})}" class="ms-5 d-inline" method="POST">
+                    <input type="hidden" name="id" th:value="${category.id}"/>
+                    <button class="btn btn-danger btn-sm" type="submit">Elimina</button>
+                </form>
+            </li>
+        </ul>
+    </section>
+</div>
+</body>
+</html>

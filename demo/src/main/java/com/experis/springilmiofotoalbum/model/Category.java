@@ -20,14 +20,6 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private List<Photo> photos = new ArrayList<>();
 
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -42,5 +34,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 }

@@ -14,57 +14,66 @@
               class="row gy-2 m-auto">
             
             
-            <div class="mb-3"
-                 th:insert="~{fragments/components :: formField('text', 'Titolo', 'titolo')}">
+            <div class="col-8 w-50 m-auto">
+                <div class="row">
+                    <!-- Campo per il nome -->
+                    <div class="mb-3" th:insert="~{fragments/components :: formField('text', 'Titolo', 'titolo')}">
+                    </div>
+                    
+                    
+                    <!-- Campo per la descrizione -->
+                    <div class="mb-3"
+                         th:insert="~{fragments/components :: formField('text', 'Descrizione', 'descrizione')}">
+                        <!--            <label for="descrizione" class="form-label">Descrizione</label>-->
+                        <!--            <textarea class="form-control" id="descrizione" th:field="*{descrizione}"-->
+                        <!--                      placeholder="Inserisci la descrizione della pizza"></textarea>-->
+                    </div>
+                    
+                    <!-- Campo per l'URL dell'immagine -->
+                    <div class="mb-3" th:insert="~{fragments/components :: formField('text', 'UrlImage', 'urlImage')}">
+                        <!--            <label for="urlImage" class="form-label">URL Immagine</label>-->
+                        <!--            <input type="text" class="form-control" id="urlImage" th:field="*{urlImage}"-->
+                        <!--                   placeholder="Inserisci l'URL dell'immagine">-->
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check mt-2">
+                            <input type="checkbox" class="form-check-input" id="visible" th:field="*{visible}">
+                            <label class="form-check-label" for="visible">Visible/NotVisible</label>
+                        </div>
+                    </div>
+                </div>
             
             </div>
             
-            <!-- Campo per la descrizione -->
-            <div class="mb-3"
-                 th:insert="~{fragments/components :: formField('textarea', 'Descrizione', 'descrizione')}">
-            
-            </div>
-            
-            <!-- Campo per l'URL dell'immagine -->
-            <div class="mb-3"
-                 th:insert="~{fragments/components :: formField('text', 'URL Immagine', 'urlImage')}">
-            
-            </div>
-            
-            <!-- Campo per la visibilità -->
-            <div class="mb-3"
-                 th:insert="~{fragments/components :: formField('checkbox', 'Visibile', 'visible')}">
-            
-            </div>
-            
-            <div class="col-4 mb-5 text-light">
-                <h3>Categorie</h3>
-                <div th:each="cat : ${categoryList}" class="form-check">
+            <div class="col-4 mb-5">
+                
+                
+                <div class="form-check" th:each="category : ${categoryList}">
                     <input class="form-check-input"
                            type="checkbox"
-                           th:value="${cat.id}"
-                           th:id="|cat_${cat.id}|"
-                           th:field="*{categories}"/>
-                    <label class="form-check-label"
-                           th:for="|cat_${cat.id}|"
-                           th:text="${cat.name}">
-                    
-                    </label>
+                           th:value="${category.id}"
+                           th:id="|category_${category.id}|"
+                           th:field="*{categories}"
+                    >
+                    <label class="form-check-label " th:for="|category_${category.id}|"
+                           th:text="${category.name}"></label>
                 </div>
+            
             </div>
+            <!-- Pulsante di invio -->
+            <div>
+                <button type="submit" class="d-block btn btn-primary w-25 mx-auto">Salva</button>
+                
+                
+                <a th:href="@{/photos}" class="d-block btn btn-secondary w-25 mx-auto mt-3">Torna alla lista</a>
             
             
-            <button type="submit" class="btn btn-primary">Salva</button>
-            <a th:href="@{/photos}" class="btn btn-secondary">Torna alla lista</a>
+            </div>
         
         
         </form>
-        <!--        <ul>-->
-        <!--            <li th:each="categoria : ${photo.categories}" th:text="${categoria.name}">Categoria</li>-->
-        <!--        </ul>-->
     </div>
 </div>
-
 
 </body>
 </html>

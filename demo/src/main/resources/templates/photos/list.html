@@ -52,7 +52,38 @@
                     <div class="d-flex justify-content-around">
                         <a th:href="@{/photos/show/{id}(id=*{id})}" class="btn btn-info btn-sm">Dettagli</a>
                         <a th:href="@{/photos/edit/{id}(id=${photo.id})}" class="btn btn-primary btn-sm">Modifica</a>
-                        <a th:href="@{/photos/delete/{id}(id=${photo.id})}" class="btn btn-danger btn-sm">Cancella</a>
+                        <button
+                                
+                                type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" th:data-bs-target="|#exampleModal_*{id}|"
+                        >
+                            Cancella
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" th:id="|exampleModal_*{id}|" tabindex="-1"
+                             th:aria-labelledby="|exampleModalLabel_*{id}|" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-dark text-white">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" th:id="|exampleModalLabel_*{id}|">Conferma
+                                            Eliminazione</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Sei sicuro di voler eliminare la foto con id: [[*{id}]] e nome: <span
+                                            th:text="${photo.titolo}">NomeFoto</span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi
+                                        </button>
+                                        <form method="POST" th:action="@{/photos/delete/{id}(id=*{id})}">
+                                            <button type="submit" class="btn btn-danger">Cancella</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>

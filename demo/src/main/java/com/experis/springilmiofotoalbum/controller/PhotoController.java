@@ -1,10 +1,7 @@
 package com.experis.springilmiofotoalbum.controller;
 
 import com.experis.springilmiofotoalbum.exception.PhotoNotFoundException;
-import com.experis.springilmiofotoalbum.model.Category;
 import com.experis.springilmiofotoalbum.model.Photo;
-import com.experis.springilmiofotoalbum.repository.CategoryRepository;
-import com.experis.springilmiofotoalbum.repository.PhotoRepository;
 import com.experis.springilmiofotoalbum.service.CategoryService;
 import com.experis.springilmiofotoalbum.service.PhotoService;
 import jakarta.validation.Valid;
@@ -23,15 +20,15 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/photos")
-public class photoController {
-    @Autowired
-    private PhotoRepository photoRepository;
+public class PhotoController {
+    //    @Autowired
+//    private PhotoRepository photoRepository;
     @Autowired
     private PhotoService photoService;
     @Autowired
     private CategoryService categoryService;
-    @Autowired
-    private CategoryRepository categoryRepository;
+//    @Autowired
+////    private CategoryRepository categoryRepository;
 
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
@@ -55,8 +52,8 @@ public class photoController {
     public String create(Model model) {
         model.addAttribute("photo", new Photo());
 
-        List<Category> categoryList = categoryService.getAll();
-        model.addAttribute("categoryList", categoryList);
+//        List<Category> categoryList = categoryService.getAll();
+        model.addAttribute("categoryList", categoryService.getAll());
         return "photos/form";
     }
 
@@ -91,7 +88,7 @@ public class photoController {
         }
         try {
             Photo updatedPhoto = photoService.updatePhoto(formPhoto);
-            return "redirect:/photos/show" + updatedPhoto.getId();
+            return "redirect:/photos/show/" + updatedPhoto.getId();
 
         } catch (PhotoNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,23 +17,27 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotBlank(message = "il nome non puo essere vuoto")
-    @Size(min = 2, max = 100, message = "il campo non può essere minore di 5 e maggiore di 100 caratteri")
-//    @Column(length = 100, nullable = false, unique = true)
+//    @Column(nullable = false)
+    @Size(max = 100, message = "il campo non può essere minore di 5 e maggiore di 100 caratteri")
+    @Column(length = 100, nullable = false, unique = true)
     private String titolo;
     @NotBlank(message = "il campo descrizione non puo essere vuoto")
-    @Size(min = 5, max = 255, message = "il campo non può essere minore di 5 maggiore di 255 caratteri")
+    @Column(nullable = false)
+    @Size(max = 255, message = "il campo non può essere minore di 5 maggiore di 255 caratteri")
     private String descrizione;
     @NotBlank
+    @Column(nullable = false)
+    @URL(message = "Il link deve essere un URL valido!")
     private String urlImage;
     @NotNull
     private boolean visible;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "photos_categories",
-//            joinColumns = @JoinColumn(name = "photos_id"),
-//            inverseJoinColumns = @JoinColumn(name = "categories_id"))
+    @JoinTable(
+            name = "photos_categories",
+            joinColumns = @JoinColumn(name = "photos_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id"))
     private List<Category> categories;
 
     public Integer getId() {
@@ -90,6 +95,4 @@ public class Photo {
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
-
-
 }

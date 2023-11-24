@@ -14,13 +14,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
+                    <a class="nav-link" th:classappend="${area == 'users' ? 'active' : ''}"
+                       th:href="@{/users}">Foto</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" th:classappend="${area == 'photos' ? 'active' : ''}"
                        th:href="@{/photos}">Foto</a>
                 </li>
-                <!-- Aggiungi qui altri link se necessario -->
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${area == 'categories' ? 'active' : ''}"
+                       th:href="@{/categories}">Categorie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${area == 'messages' ? 'active' : ''}"
+                       th:href="@{/categories}">Categorie</a>
+                </li>
             </ul>
             <div class="ms-3 mt-2">
-                <!-- Dettagli dell'utente e logout se necessario -->
+                <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item d-flex justify-content-end">
+                        <a class="nav-link" th:classAppend="${area == 'logout' ? 'active' : ''}"
+                           th:href="@{/logout}">Logout
+                        </a>
+                    </li>
+                </div>
             </div>
         </div>
     </div>
