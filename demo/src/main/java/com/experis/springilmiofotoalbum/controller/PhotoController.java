@@ -7,6 +7,8 @@ import com.experis.springilmiofotoalbum.service.PhotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +28,8 @@ public class PhotoController {
     private PhotoService photoService;
     @Autowired
     private CategoryService categoryService;
-
+//@Autowired
+//private UserSer
 
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
@@ -71,12 +74,16 @@ public class PhotoController {
     }
 
     @PostMapping("/store")
-    public String store(@Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model) {
+    public String store(@AuthenticationPrincipal UserDetails userDetails, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categoryList", categoryService.getAll());
             return "photos/form";
         }
         try {
+            // Trova l'utente autenticato e collega la foto a quell'utent
+//            User user =
+//            User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();
+//            photoService.savePhoto(formPhoto, user);
             Photo savedPhoto = photoService.savePhoto(formPhoto);
             return "redirect:/photos/show/" + savedPhoto.getId();
         } catch (RuntimeException e) {

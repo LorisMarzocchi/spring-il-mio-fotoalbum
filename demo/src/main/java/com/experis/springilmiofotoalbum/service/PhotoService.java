@@ -2,6 +2,7 @@ package com.experis.springilmiofotoalbum.service;
 
 import com.experis.springilmiofotoalbum.exception.PhotoNotFoundException;
 import com.experis.springilmiofotoalbum.model.Photo;
+import com.experis.springilmiofotoalbum.model.User;
 import com.experis.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,17 @@ public class PhotoService {
         } else {
             throw new PhotoNotFoundException("Photo with id " + id + " not found");
         }
+    }
+
+    // Metodo per ottenere le foto di un utente specifico
+    public List<Photo> getPhotosByUser(User user) {
+        return photoRepository.findByUser(user);
+    }
+
+    // (Opzionale) Modifica il metodo savePhoto per associare la foto all'utente
+    public Photo savePhoto(Photo photo, User user) {
+        photo.setUser(user); // Assicurati che la classe Photo abbia un metodo setUser
+        return savePhoto(photo); // Riutilizza il metodo savePhoto esistente
     }
 
     public Photo savePhoto(Photo photo) {

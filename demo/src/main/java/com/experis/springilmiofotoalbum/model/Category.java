@@ -2,6 +2,7 @@ package com.experis.springilmiofotoalbum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -19,6 +20,7 @@ public class Category {
 
     @Size(max = 100)
     @Column(nullable = false, unique = true)
+    @NotBlank
     private String name;
     @ManyToMany(mappedBy = "categories")
     @OnDelete(action = OnDeleteAction.CASCADE)

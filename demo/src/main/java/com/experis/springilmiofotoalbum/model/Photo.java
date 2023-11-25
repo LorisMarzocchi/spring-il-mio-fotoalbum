@@ -30,7 +30,7 @@ public class Photo {
     @URL(message = "Il link deve essere un URL valido!")
     private String urlImage;
     @NotNull
-    private boolean visible;
+    private boolean visible = true;
     @CreationTimestamp
     private LocalDateTime createdAt;
     //    @JoinTable(
@@ -39,6 +39,19 @@ public class Photo {
 //            inverseJoinColumns = @JoinColumn(name = "categories_id"))
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
