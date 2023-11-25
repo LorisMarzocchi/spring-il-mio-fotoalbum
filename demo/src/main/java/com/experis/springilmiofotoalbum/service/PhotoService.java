@@ -15,13 +15,13 @@ public class PhotoService {
     @Autowired
     private PhotoRepository photoRepository;
 
-    public List<Photo> getPhotoSearch(Optional<String> search) {
-        if (search.isPresent()) {
-            return photoRepository.findByTitoloContainingIgnoreCaseOrDescrizioneContaining(search.get(), search.get());
-        } else {
-            return photoRepository.findAll();
-        }
-    }
+//    public List<Photo> getPhotoSearch(Optional<String> search) {
+//        if (search.isPresent()) {
+//            return photoRepository.findByTitoloContainingIgnoreCaseOrDescrizioneContaining(search.get(), search.get());
+//        } else {
+//            return photoRepository.findAll();
+//        }
+//    }
 
     public List<Photo> getVisibleFotoList(Optional<String> search) {
         if (search.isPresent()) {
@@ -46,9 +46,13 @@ public class PhotoService {
         return photoRepository.findByUser(user);
     }
 
-    // (Opzionale) Modifica il metodo savePhoto per associare la foto all'utente
+    public List<Photo> getAllPhotos() {
+        return photoRepository.findAll();
+    }
+
+    //  metodo savePhoto per associare la foto all'utente
     public Photo savePhoto(Photo photo, User user) {
-        photo.setUser(user); // Assicurati che la classe Photo abbia un metodo setUser
+        photo.setUser(user); //
         return savePhoto(photo); // Riutilizza il metodo savePhoto esistente
     }
 

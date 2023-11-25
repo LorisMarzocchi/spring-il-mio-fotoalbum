@@ -25,3 +25,15 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         }
     }
 }
+//@Service
+//public class DatabaseUserDetailsService implements UserDetailsService {
+//    @Autowired
+//    private UserService userService;
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userService.findByEmail(username)
+//                .orElseThrow(() -> new UsernameNotFoundException(username));
+//        return new DatabaseUserDetails(user);
+//    }
+//}

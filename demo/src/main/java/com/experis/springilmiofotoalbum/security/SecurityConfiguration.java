@@ -39,10 +39,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/categories").hasAuthority("ADMIN")
-                .requestMatchers("/users").hasAnyAuthority("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/photos/**").hasAuthority("ADMIN")
-                .requestMatchers("/photos", "/photos/**").hasAnyAuthority("ADMIN")
+                .requestMatchers("/categories").hasAuthority("SUPER_ADMIN")
+                .requestMatchers("/users").hasAuthority("SUPER_ADMIN")
+                .requestMatchers(HttpMethod.POST, "/photos/**").hasAnyAuthority("ADMIN", "SUPER_ADMIN")
+                .requestMatchers("/photos", "/photos/**").hasAnyAuthority("ADMIN", "SUPER_ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()
                 .and().logout();

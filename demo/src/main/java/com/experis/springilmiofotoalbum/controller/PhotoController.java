@@ -2,8 +2,10 @@ package com.experis.springilmiofotoalbum.controller;
 
 import com.experis.springilmiofotoalbum.exception.PhotoNotFoundException;
 import com.experis.springilmiofotoalbum.model.Photo;
+import com.experis.springilmiofotoalbum.model.User;
 import com.experis.springilmiofotoalbum.service.CategoryService;
 import com.experis.springilmiofotoalbum.service.PhotoService;
+import com.experis.springilmiofotoalbum.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/photos")
@@ -28,15 +29,30 @@ public class PhotoController {
     private PhotoService photoService;
     @Autowired
     private CategoryService categoryService;
-//@Autowired
-//private UserSer
+    @Autowired
+    private UserService userService;
 
     @GetMapping
-    public String index(@RequestParam Optional<String> search, Model model) {
-        List<Photo> photoList = photoService.getPhotoSearch(search);
+    public String index(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User currentUser = userService.findByEmail(userDetails.getUsername()).orElseThrow();
+
+        List<Photo> photoList;
+        if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
+            photoList = photoService.getAllPhotos();
+        } else {
+            photoList = photoService.getPhotosByUser(currentUser);
+        }
+
         model.addAttribute("photoList", photoList);
         return "photos/list";
     }
+
+//    @GetMapping
+//    public String index(@RequestParam Optional<String> search, Model model) {
+//        List<Photo> photoList = photoService.getPhotoSearch(search);
+//        model.addAttribute("photoList", photoList);
+//        return "photos/list";
+//    }
 
 //    @GetMapping
 //    public String index(@AuthenticationPrincipal DatabaseUserDetails userDetails, @RequestParam Optional<String> search, Model model) {
@@ -80,10 +96,10 @@ public class PhotoController {
             return "photos/form";
         }
         try {
-            // Trova l'utente autenticato e collega la foto a quell'utent
-//            User user =
-//            User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();
+            // Trova l'utente autenticato e collega la foto a quell'utente
+            User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();
 //            photoService.savePhoto(formPhoto, user);
+            formPhoto.setUser(user);
             Photo savedPhoto = photoService.savePhoto(formPhoto);
             return "redirect:/photos/show/" + savedPhoto.getId();
         } catch (RuntimeException e) {

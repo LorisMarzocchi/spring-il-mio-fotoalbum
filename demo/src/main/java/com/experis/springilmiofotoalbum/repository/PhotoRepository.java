@@ -21,4 +21,5 @@ public interface PhotoRepository extends JpaRepository<Photo, Integer> {
     List<Photo> findAllVisiblePhotos();
 
     List<Photo> findByUser(User user);
+    
 }
