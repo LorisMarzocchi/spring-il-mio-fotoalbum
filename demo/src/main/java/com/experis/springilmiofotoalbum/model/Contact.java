@@ -1,7 +1,9 @@
 package com.experis.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "contact")
@@ -10,10 +12,13 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotBlank
+    @Size(min = 3, max = 100)
     private String name;
     @NotBlank
+    @Email
     private String email;
     @NotBlank
+    @Lob
     private String message;
 
     public Integer getId() {

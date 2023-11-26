@@ -38,8 +38,8 @@
             </div>
             <div class="ms-3 mt-2">
                 <div class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item d-flex justify-content-end"><span class="mx-3"
-                                                                          sec:authentication=" name"></span>
+                    <li class="nav-item d-flex align-items-center"><span class="mx-3"
+                                                                         sec:authentication=" name"></span>
                         <a class="btn btn-primary" th:classAppend="${area == 'logout' ? 'active' : ''}"
                            th:href="@{/logout}">Logout
                         </a>

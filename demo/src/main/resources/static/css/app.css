@@ -24,12 +24,15 @@
 
        }
        .active{
-        color: red;
+        color: red !important;
        }
        .tablePhotos th{
             color: white !important;
             padding-bottom: 15px;
 
+       }
+       .nav-link {
+           font-weight: bold;
        }
 
 
