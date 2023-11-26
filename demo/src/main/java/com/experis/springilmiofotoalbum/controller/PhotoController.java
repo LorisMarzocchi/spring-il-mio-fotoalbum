@@ -99,9 +99,13 @@ public class PhotoController {
         try {
             // Trova l'utente autenticato e collega la foto a quell'utente
             User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();
-//            photoService.savePhoto(formPhoto, user);
-            formPhoto.setUser(user);
-            Photo savedPhoto = photoService.savePhoto(formPhoto);
+
+            /// Con overload del metodo save in PhotoService -->
+            /// photo.setId(null);
+            /// formPhoto.setUser(user);
+            /// photoService.savePhoto(formPhoto);
+
+            Photo savedPhoto = photoService.savePhoto(formPhoto, user);
             return "redirect:/photos/show/" + savedPhoto.getId();
         } catch (RuntimeException e) {
             bindingResult.addError(new FieldError("photo", "titolo", e.getMessage(), false, null, null, "Il nome deve essere unico"));

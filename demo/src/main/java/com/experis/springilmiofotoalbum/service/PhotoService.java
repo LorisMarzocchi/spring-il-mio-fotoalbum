@@ -55,16 +55,30 @@ public class PhotoService {
         }
     }
 
+    // Con overload di metodi separa meglio i compiti
     //  metodo savePhoto per associare la foto all'utente
+//    public Photo savePhoto(Photo photo, User user) {
+//        photo.setUser(user); //
+//        return savePhoto(photo); // Riutilizza il metodo savePhoto esistente
+//    }
+//
+//    public Photo savePhoto(Photo photo) {
+//        photo.setId(null);
+//        try {
+//            return photoRepository.save(photo);
+//        } catch (RuntimeException e) {
+//            throw new RuntimeException("Errore durante il salvataggio della foto: " + e.getMessage(), e);
+//        }
+//    }
     public Photo savePhoto(Photo photo, User user) {
-        photo.setUser(user); //
-        return savePhoto(photo); // Riutilizza il metodo savePhoto esistente
-    }
+        if (user != null) {
+            photo.setUser(user); // Associa l'utente alla foto, se l'utente è fornito
+        }
 
-    public Photo savePhoto(Photo photo) {
-        photo.setId(null);
+        photo.setId(null); // Imposta l'ID della foto su null
+
         try {
-            return photoRepository.save(photo);
+            return photoRepository.save(photo); // Salva la foto nel repository
         } catch (RuntimeException e) {
             throw new RuntimeException("Errore durante il salvataggio della foto: " + e.getMessage(), e);
         }

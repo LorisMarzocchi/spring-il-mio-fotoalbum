@@ -13,7 +13,7 @@ public interface PhotoRepository extends JpaRepository<Photo, Integer> {
 
     @Query("SELECT p FROM Photo p WHERE (p.titolo LIKE %?1% OR p.descrizione LIKE %?2%) AND p.visible = true")
     List<Photo> findByTitoloContainingIgnoreCaseOrDescrizioneContainingAndVisible(String titleKeyword, String descriptionKeyword, boolean visible);
-    /// FUNZIONA ANCHE SE LA CHIAMI "PIPPO"
+    /// FUNZIONA ANCHE SE LA CHIAMI "asdfasdf" PRENDE IL VALORE DELLA QUERY
 
     //
 //    List<Photo> findByVisible(boolean visible);
@@ -21,5 +21,5 @@ public interface PhotoRepository extends JpaRepository<Photo, Integer> {
     List<Photo> findAllVisiblePhotos();
 
     List<Photo> findByUser(User user);
-    
+
 }
