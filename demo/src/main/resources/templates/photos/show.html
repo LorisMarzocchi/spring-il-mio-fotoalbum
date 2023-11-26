@@ -7,26 +7,31 @@
     <h1 class="mb-4">Dettaglio Foto</h1>
     <a th:href="@{/photos}" class="btn btn-primary">Torna alla lista</a>
     <div class="row mt-4">
-        <div class="col-6">
+        <div class="col-8">
             
             <div class="card mb-3 w-50 m-auto">
-                <img class="card-img-top" th:src="*{urlImage}" alt="Immagine della Foto">
+                <img class=" p-2 card-img-top m-auto image-fluid" style="height: 300px;width: 250px;"
+                     th:src="*{urlImage}"
+                     alt="Immagine della Foto">
                 <div class="card-body">
                     <h5 class="card-title" th:text="*{titolo}">Titolo della Foto</h5>
                     <p class="card-text" th:text="*{descrizione}">Descrizione della Foto</p>
                     <p class="card-text"
                        th:text="*{visible ? 'Visibile' : 'Non Visibile'}"></p>
-                    <p class="card-text" th:text="*{#temporals.format(createdAt, 'dd-MM-yyyy')}">Data di
-                        Creazione</p>
+                    <span>Data di
+                        creazione</span>
+                    <p class="card-text" th:text="*{#temporals.format(createdAt, 'dd-MM-yyyy')}"></p>
                 
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             
             <h5>Categorie:</h5>
-            <ul>
-                <li th:each="categoria : ${photo.categories}" th:text="${categoria.name}">Categoria</li>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="categoria : ${photo.categories}" th:text="${categoria.name}">
+                    Categoria
+                </li>
             </ul>
         </div>
     </div>

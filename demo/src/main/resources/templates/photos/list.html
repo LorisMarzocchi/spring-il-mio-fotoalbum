@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="~{/fragments/resources :: headResources('photo-list')}"></head>
 <body>
-<nav th:replace="~{/fragments/navbar :: topNavbar('pizzas')}"></nav>
+<nav th:replace="~{/fragments/navbar :: topNavbar('photos')}"></nav>
 <div class="container mt-4">
     <div th:replace="~{fragments/components :: message}"></div>
     <h1 class="mb-4">Lista delle Foto</h1>
@@ -26,7 +26,7 @@
     </form>
     <div th:if="${photoList.size() > 0}">
         
-        <table class="table table-dark table-hover">
+        <table class="tablePhotos table table-dark table-hover">
             <thead>
             <tr>
                 <th>ID</th>

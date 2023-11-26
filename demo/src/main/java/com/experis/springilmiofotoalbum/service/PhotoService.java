@@ -46,8 +46,13 @@ public class PhotoService {
         return photoRepository.findByUser(user);
     }
 
-    public List<Photo> getAllPhotos() {
-        return photoRepository.findAll();
+    public List<Photo> getAllPhotos(Optional<String> search) {
+        if (search.isPresent()) {
+
+            return photoRepository.findByTitoloContainingIgnoreCaseOrDescrizioneContaining(search.get(), search.get());
+        } else {
+            return photoRepository.findAll();
+        }
     }
 
     //  metodo savePhoto per associare la foto all'utente

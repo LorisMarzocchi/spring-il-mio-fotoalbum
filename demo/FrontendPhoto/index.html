@@ -10,28 +10,38 @@
       crossorigin="anonymous"
     />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/app.css" />
 
     <title>spring-front</title>
   </head>
   <body>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid justify-content-evenly">
+        <a class="navbar-brand" href="contact.html">Contattaci</a>
+        <div class="d-flex">
+          <input
+            id="searchNameField"
+            class="searchInput form-control me-2"
+            type="text"
+            placeholder="Cerca foto per nome o descrizione!"
+            aria-label="Search"
+          />
+          <button
+            class="btn btn-outline-success"
+            type="submit"
+            onclick="searchPhoto()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </nav>
     <div class="container">
       <h1>Photo</h1>
-      <a href="contact.html">Contattaci</a>
-      <div>
-        <div class="mb-3">
-          <input
-            type="text"
-            class="form-control w-25"
-            id="searchNameField"
-            placeholder="Cerca foto per nome o descrizione!"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary" onclick="searchPhoto()">
-          Submit
-        </button>
-      </div>
+
+      <div></div>
       <div id="root" class="container text-primary"></div>
     </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

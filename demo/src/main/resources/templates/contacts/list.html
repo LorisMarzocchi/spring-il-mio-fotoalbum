@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/resources :: headResources('Users List')}"></head>
+<body>
+<nav th:replace="~{fragments/navbar :: topNavbar('contacts')}"></nav>
+<div class="container">
+    <h1>Messaggi</h1>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">nome</th>
+                <th scope="col">email</th>
+                <th scope="col">messaggio</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contact : ${contacts}" th:object="${contact}">
+                <th scope="row" th:text="*{id}"></th>
+                <td th:text="*{name}"></td>
+                <td th:text="*{email}"></td>
+                <td th:text="*{message}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--    <div th:if="${users.isEmpty()}">-->
+    <!--        Nessun utente registrato.-->
+    <!--    </div>-->
+</div>
+</body>
+</html>

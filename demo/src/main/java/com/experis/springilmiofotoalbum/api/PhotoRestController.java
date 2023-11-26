@@ -26,7 +26,7 @@ public class PhotoRestController {
 //    public String index(@RequestParam Optional<String> search, Model model) {
 //        model.addAttribute("fotoList", photoService.getVisibleFotoList(search));
 //        model.addAttribute("searchKeyword", search.orElse(""));
-//        return "fotos/index";
+//        return "photos/index";
 //    }
 
     @GetMapping("/{id}")

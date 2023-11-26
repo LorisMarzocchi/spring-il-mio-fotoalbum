@@ -1,0 +1,39 @@
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+
+            font-size: 0.95rem;
+        }
+         .imgList {
+                max-width: 80px;
+                height: auto;
+                display: block;
+                margin: auto;
+        }
+       th{
+            color: red !important;
+       }
+       .userRole{
+            font-weight: bold;
+
+       }
+       .tableUser{
+          border-radius: 15px !important;
+
+       }
+       .active{
+        color: red;
+       }
+       .tablePhotos th{
+            color: white !important;
+            padding-bottom: 15px;
+
+       }
+
+
+
+
+
+

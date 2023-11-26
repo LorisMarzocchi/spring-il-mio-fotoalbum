@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="~{fragments/resources :: headResources('Categories')}"></head>
 <body>
-<nav th:replace="~{/fragments/navbar :: topNavbar('photos-create')}"></nav>
-<div class="container">
+<nav th:replace="~{/fragments/navbar :: topNavbar('categories')}"></nav>
+<div class="container w-50">
     <!-- message da redirectAttributes -->
     
     <div th:replace="~{fragments/components :: message}"></div>
@@ -27,7 +27,7 @@
             <li
                     th:each="category : ${categoryList}"
                     th:object="${category}"
-                    class="list-group-item"
+                    class="list-group-item d-flex justify-content-between"
             >
                 <span th:text="${category.name}"></span>
                 <form th:action="@{categories/delete/{id}(id=*{id})}" class="ms-5 d-inline" method="POST">

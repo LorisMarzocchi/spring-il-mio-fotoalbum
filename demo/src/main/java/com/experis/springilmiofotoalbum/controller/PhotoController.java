@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/photos")
@@ -33,12 +34,12 @@ public class PhotoController {
     private UserService userService;
 
     @GetMapping
-    public String index(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String index(@AuthenticationPrincipal UserDetails userDetails, @RequestParam Optional<String> search, Model model) {
         User currentUser = userService.findByEmail(userDetails.getUsername()).orElseThrow();
 
         List<Photo> photoList;
         if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
-            photoList = photoService.getAllPhotos();
+            photoList = photoService.getAllPhotos(search);
         } else {
             photoList = photoService.getPhotosByUser(currentUser);
         }

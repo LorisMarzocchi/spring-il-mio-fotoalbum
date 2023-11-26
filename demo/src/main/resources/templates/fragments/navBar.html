@@ -1,38 +1,45 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <body>
 <nav th:fragment="topNavbar(area)" class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/icons/logo.png}" alt="Logo dell'applicazione">
+            <img th:src="@{/icons/logo.png}" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" th:classappend="${area == 'users' ? 'active' : ''}"
-                       th:href="@{/users}">User</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:classappend="${area == 'photos' ? 'active' : ''}"
-                       th:href="@{/photos}">Foto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:classappend="${area == 'categories' ? 'active' : ''}"
-                       th:href="@{/categories}">Categorie</a>
-                </li>
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" th:classappend="${area == 'messages' ? 'active' : ''}"-->
-                <!--                       th:href="@{/categories}">Categorie</a>-->
-                <!--                </li>-->
-            </ul>
+        <div class="collapse navbar-collapse justify-content-around align-items-center" id="navbarSupportedContent">
+            <div>
+                
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="hasAuthority('SUPER_ADMIN')"
+                           th:classappend="${area == 'users' ? 'active' : ''}"
+                           th:href="@{/users}">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${area == 'photos' ? 'active' : ''}"
+                           th:href="@{/photos}">Foto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${area == 'categories' ? 'active' : ''}"
+                           th:href="@{/categories}">Categorie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="hasAuthority('SUPER_ADMIN')"
+                           th:classappend="${area == 'contacts' ? 'active' : ''}"
+                           th:href="@{/contacts}">Messaggi ricevuti</a>
+                    </li>
+                </ul>
+            </div>
             <div class="ms-3 mt-2">
                 <div class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item d-flex justify-content-end">
+                    <li class="nav-item d-flex justify-content-end"><span class="mx-3"
+                                                                          sec:authentication=" name"></span>
                         <a class="btn btn-primary" th:classAppend="${area == 'logout' ? 'active' : ''}"
                            th:href="@{/logout}">Logout
                         </a>

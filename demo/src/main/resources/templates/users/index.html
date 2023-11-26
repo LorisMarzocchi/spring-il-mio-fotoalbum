@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/resources :: headResources('Users List')}"></head>
+<body>
+<nav th:replace="~{fragments/navbar :: topNavbar('users')}"></nav>
+<div class="container">
+    <h1>Admin</h1>
+    <table class=" tableUser w-50 mt-5 table table-bordered">
+        <thead>
+        <tr>
+            <th>Ruolo</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td class="userRole" th:text="${user.roles[0].name}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <!--    <div th:if="${users.isEmpty()}">-->
+    <!--        Nessun utente registrato.-->
+    <!--    </div>-->
+</div>
+</body>
+</html>
