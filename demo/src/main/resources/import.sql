@@ -36,4 +36,4 @@ INSERT INTO photos_categories (photos_id, categories_id) VALUES (6, 3);
 
 
 INSERT INTO contact (name, email, message) VALUES ("Peppe", "peppe@email.com", "ciao ciao ciao ciao ciao");
-INSERT INTO contact (name, email, message) VALUES ("Pino", "pino@email.com", "ciao ciao ciao ciao ciao ciao ciao ciao");
+INSERT INTO contact (name, email, message) VALUES ("Pino", "pino@email.com", "ciao ciao ciao ciao ciao ciao ciao ciao ciao");
