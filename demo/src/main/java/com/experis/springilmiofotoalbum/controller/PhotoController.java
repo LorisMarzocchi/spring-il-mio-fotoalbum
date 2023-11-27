@@ -36,14 +36,15 @@ public class PhotoController {
     @GetMapping
     public String index(@AuthenticationPrincipal UserDetails userDetails, @RequestParam Optional<String> search, Model model) {
         User currentUser = userService.findByEmail(userDetails.getUsername()).orElseThrow();
-
+        // passo la lista degli users
+        List<User> userList = userService.getAllUsers();
         List<Photo> photoList;
         if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
             photoList = photoService.getAllPhotos(search);
         } else {
             photoList = photoService.getPhotosByUser(currentUser, search);
         }
-//        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("userList", userList);
         model.addAttribute("photoList", photoList);
         return "photos/list";
     }

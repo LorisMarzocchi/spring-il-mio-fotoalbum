@@ -30,7 +30,7 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <!--                <th>Creato da</th>-->
+                <th>Creato da</th>
                 <th>Titolo</th>
                 <th>Descrizione</th>
                 <th>URL Immagine</th>
@@ -41,10 +41,10 @@
             </thead>
             <tbody>
             <tr th:each="photo : ${photoList}" th:object="${photo}">
-                <td th:text="*{id}">ID</td>
-                <!--                <td th:text="${users.email}">ID</td>-->
-                <td th:text="*{titolo}">Titolo</td>
-                <td th:text="*{descrizione}">Descrizione</td>
+                <td th:text="*{id}"></td>
+                <td th:text="${photo.user != null} ? ${photo.user.firstName + ' ' + photo.user.lastName} : 'Nessun utente'"></td>
+                <td th:text="*{titolo}"></td>
+                <td th:text="*{descrizione}"></td>
                 <td>
                     <img class="imgList" th:src="*{urlImage}" alt="">
                 </td>
