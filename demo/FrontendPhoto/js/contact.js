@@ -50,6 +50,11 @@ document
       messageError.textContent = "Il campo 'Messaggio' è obbligatorio.";
       messageError.classList.add("d-block");
       isValid = false;
+    } else if (message.length < 3 || message.length > 250) {
+      messageError.textContent =
+        "Il campo messaggio non deve essere minore di 3 o maggiore di 250 caratteri";
+      messageError.classList.add("d-block");
+      isValid = false;
     }
     if (isValid) {
       axios

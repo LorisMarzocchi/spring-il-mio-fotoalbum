@@ -34,7 +34,13 @@
        .nav-link {
            font-weight: bold;
        }
-
+        .message-cell {
+            max-width: 350px;
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
 
 
 
