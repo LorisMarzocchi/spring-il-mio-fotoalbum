@@ -21,6 +21,9 @@ INSERT INTO photos (titolo, descrizione, url_image, visible, created_at, user_id
 INSERT INTO categories (name) VALUES ('Natura');
 INSERT INTO categories (name) VALUES ('Città');
 INSERT INTO categories (name) VALUES ('Persone');
+INSERT INTO categories (name) VALUES ('Ritratti');
+INSERT INTO categories (name) VALUES ('Arte');
+INSERT INTO categories (name) VALUES ('Animali');
 
 
 ---- Insert photo-category relationships
@@ -31,3 +34,6 @@ INSERT INTO photos_categories (photos_id, categories_id) VALUES (4, 1);
 INSERT INTO photos_categories (photos_id, categories_id) VALUES (5, 2);
 INSERT INTO photos_categories (photos_id, categories_id) VALUES (6, 3);
 
+
+INSERT INTO contact (name, email, message) VALUES ("Peppe", "peppe@email.com", "ciao ciao ciao ciao ciao");
+INSERT INTO contact (name, email, message) VALUES ("Pino", "pino@email.com", "ciao ciao ciao ciao ciao ciao ciao ciao");

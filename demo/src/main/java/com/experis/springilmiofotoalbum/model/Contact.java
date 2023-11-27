@@ -18,8 +18,9 @@ public class Contact {
     @Email
     private String email;
     @NotBlank(message = "il campo descrizione non puo essere vuoto")
-    @Column(nullable = false)
-    @Size(max = 255, message = "il campo non può essere minore di 5 maggiore di 255 caratteri")
+//    @Column(nullable = false)
+//    @Size(max = 255, message = "il campo non può essere minore di 5 maggiore di 255 caratteri")
+ 
     private String message;
 
     public Integer getId() {

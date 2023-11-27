@@ -116,10 +116,14 @@ public class PhotoController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
-        Photo photo = photoService.getPhotoById(id);
-        model.addAttribute("photo", photo);
-        model.addAttribute("categoryList", categoryService.getAll());
-        return "photos/form";
+        try {
+            Photo photo = photoService.getPhotoById(id);
+            model.addAttribute("photo", photo);
+            model.addAttribute("categoryList", categoryService.getAll());
+            return "photos/form";
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
     @PostMapping("/edit/{id}")
