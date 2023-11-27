@@ -5,7 +5,7 @@
 <nav th:replace="~{/fragments/navbar :: topNavbar('photos')}"></nav>
 <div class="container mt-4">
     <div th:replace="~{fragments/components :: message}"></div>
-    <h1 class="mb-4">Lista delle Foto</h1>
+    <h2 class="text-danger mb-4">Lista delle Foto</h2>
     <div class="text-center">
         <a class="btn btn-primary my-5" th:href="@{/photos/create}" title="create">Aggiungi Nuova Photo</a>
     
@@ -29,7 +29,7 @@
         <table class="tablePhotos table table-dark table-hover">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>ID Foto</th>
                 <th>Creato da</th>
                 <th>Titolo</th>
                 <th>Descrizione</th>
@@ -66,7 +66,7 @@
                     </form>
                 
                 </td>
-                <td th:text="*{#temporals.format(createdAt, 'dd-MM-yyyy')}">Data Creazione</td>
+                <td th:text="*{#temporals.format(createdAt, 'dd-MM-yyyy')}"></td>
                 <td>
                     <!-- Pulsanti di Azione -->
                     <div class="d-flex justify-content-around">
@@ -74,7 +74,7 @@
                         <a th:href="@{/photos/edit/{id}(id=${photo.id})}" class="btn btn-primary btn-sm">Modifica</a>
                         <button
                                 
-                                type="button" class="btn btn-danger"
+                                type="button" class="btn btn-sm btn-danger"
                                 data-bs-toggle="modal" th:data-bs-target="|#exampleModal_*{id}|"
                         >
                             Cancella

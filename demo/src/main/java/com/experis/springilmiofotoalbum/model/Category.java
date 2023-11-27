@@ -18,9 +18,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(max = 100)
+    @Size(min = 3, max = 100, message = "il nome della categoria non può essere inferiore a 3 o maggiore di 100 caratteri")
     @Column(nullable = false, unique = true)
-    @NotBlank
+    @NotBlank(message = "il nome della categoria non puo essere vuoto")
     private String name;
     @ManyToMany(mappedBy = "categories")
     @OnDelete(action = OnDeleteAction.CASCADE)

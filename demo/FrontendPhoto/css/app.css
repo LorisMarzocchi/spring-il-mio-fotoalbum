@@ -11,3 +11,10 @@
     max-width: 500px;
     margin: auto;
 }
+body, .navbar{
+    background-color: black;
+}
+img{
+    height: 250px;
+    padding: 0.5rem;
+}

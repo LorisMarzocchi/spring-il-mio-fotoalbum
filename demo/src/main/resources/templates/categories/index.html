@@ -7,7 +7,7 @@
     <!-- message da redirectAttributes -->
     
     <div th:replace="~{fragments/components :: message}"></div>
-    <h1>Categories</h1>
+    <h2 class="text-danger">Categorie</h2>
     <hr>
     <section>
         <form
@@ -17,25 +17,45 @@
                 th:object="${categoryObj}"
         >
             <div class="mb-3"
-                 th:insert="~{fragments/components :: formField('text', 'Category name', 'name')}">
+                 th:insert="~{fragments/components :: formField('text', 'Inserisci una nuova Categoria', 'name')}">
             </div>
-            <button class="btn btn-primary" type="submit">Add category</button>
+            <button class="btn btn-primary" type="submit">Aggiungi Categoria</button>
         </form>
     </section>
     <section class="mt-4">
-        <ul class="list-group list-group-flush">
-            <li
-                    th:each="category : ${categoryList}"
-                    th:object="${category}"
-                    class="list-group-item d-flex justify-content-between"
-            >
-                <span th:text="${category.name}"></span>
-                <form th:action="@{categories/delete/{id}(id=*{id})}" class="ms-5 d-inline" method="POST">
-                    <input type="hidden" name="id" th:value="${category.id}"/>
-                    <button class="btn btn-danger btn-sm" type="submit">Elimina</button>
-                </form>
-            </li>
-        </ul>
+        <!--        <ul class="list-group list-group-flush list-group-item-dark">-->
+        <!--            <li-->
+        <!--                    th:each="category : ${categoryList}"-->
+        <!--                    th:object="${category}"-->
+        <!--                    class="list-group-item d-flex justify-content-between"-->
+        <!--            >-->
+        <!--                <span th:text="${category.name}"></span>-->
+        <!--                <form th:action="@{categories/delete/{id}(id=*{id})}" class="ms-5 d-inline" method="POST">-->
+        <!--                    <input type="hidden" name="id" th:value="${category.id}"/>-->
+        <!--                    <button class="btn btn-danger btn-sm" type="submit">Elimina</button>-->
+        <!--                </form>-->
+        <!--            </li>-->
+        <!--        </ul>-->
+        <table class="tablePhotos text-center table table-dark">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categoryList}" th:object="${category}">
+                <td th:text="${category.name}"></td>
+                <td>
+                    <form th:action="@{categories/delete/{id}(id=*{id})}" class="d-inline" method="POST">
+                        <input type="hidden" name="id" th:value="${category.id}"/>
+                        <button class="btn btn-danger btn-sm" type="submit">Elimina</button>
+                    </form>
+                </td>
+            </tr>
+            
+            </tbody>
+        </table>
     </section>
 </div>
 </body>

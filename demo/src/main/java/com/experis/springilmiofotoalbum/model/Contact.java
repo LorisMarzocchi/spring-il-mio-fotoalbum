@@ -11,14 +11,15 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotBlank
+    @NotBlank(message = "il nome non può essere vuoto, inferiore a 3 o maggiore di 100 caratteri")
     @Size(min = 3, max = 100)
     private String name;
     @NotBlank
     @Email
     private String email;
-    @NotBlank
-    @Lob
+    @NotBlank(message = "il campo descrizione non puo essere vuoto")
+    @Column(nullable = false)
+    @Size(max = 255, message = "il campo non può essere minore di 5 maggiore di 255 caratteri")
     private String message;
 
     public Integer getId() {

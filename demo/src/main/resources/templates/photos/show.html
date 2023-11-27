@@ -6,16 +6,16 @@
 <div class="container mt-4" th:object="${photo}">
     <h1 class="mb-4">Dettaglio Foto</h1>
     <a th:href="@{/photos}" class="btn btn-primary">Torna alla lista</a>
-    <div class="row mt-4">
-        <div class="col-8">
+    <div class="row d-flex mt-4">
+        <div class="col-6">
             
             <div class="card mb-3 w-50 m-auto">
                 <img class=" p-2 card-img-top m-auto image-fluid" style="height: 300px;width: 250px;"
                      th:src="*{urlImage}"
                      alt="Immagine della Foto">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="*{titolo}">Titolo della Foto</h5>
-                    <p class="card-text" th:text="*{descrizione}">Descrizione della Foto</p>
+                    <h5 class="card-title" th:text="*{titolo}"></h5>
+                    <p class="card-text" th:text="*{descrizione}"></p>
                     <p class="card-text"
                        th:text="*{visible ? 'Visibile' : 'Non Visibile'}"></p>
                     <span>Data di
@@ -25,11 +25,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-6">
             
             <h5>Categorie:</h5>
             <ul class="list-group">
-                <li class="list-group-item" th:each="categoria : ${photo.categories}" th:text="${categoria.name}">
+                <li class="list-group-item w-50 m-auto" th:each="categoria : ${photo.categories}"
+                    th:text="${categoria.name}">
                     Categoria
                 </li>
             </ul>
