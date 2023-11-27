@@ -20,6 +20,8 @@ public interface PhotoRepository extends JpaRepository<Photo, Integer> {
     @Query("SELECT p FROM Photo p WHERE p.visible = true")
     List<Photo> findAllVisiblePhotos();
 
-    List<Photo> findByUser(User user);
+    @Query("SELECT p FROM Photo p WHERE p.user = :user AND (LOWER(p.titolo) LIKE LOWER(CONCAT('%', :titleKeyword, '%')) OR LOWER(p.descrizione) LIKE LOWER(CONCAT('%', :descriptionKeyword, '%')))")
+    List<Photo> findByUserAndTitoloContainingIgnoreCaseOrDescrizioneContainingIgnoreCase(User user, String titleKeyword, String descriptionKeyword);
 
+    List<Photo> findByUser(User user);
 }

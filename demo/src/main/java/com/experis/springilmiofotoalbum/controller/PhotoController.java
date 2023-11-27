@@ -41,9 +41,9 @@ public class PhotoController {
         if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
             photoList = photoService.getAllPhotos(search);
         } else {
-            photoList = photoService.getPhotosByUser(currentUser);
+            photoList = photoService.getPhotosByUser(currentUser, search);
         }
-
+//        model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("photoList", photoList);
         return "photos/list";
     }

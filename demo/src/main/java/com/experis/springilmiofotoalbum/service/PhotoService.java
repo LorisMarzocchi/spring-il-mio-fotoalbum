@@ -42,8 +42,12 @@ public class PhotoService {
     }
 
     // Metodo per ottenere le foto di un utente specifico
-    public List<Photo> getPhotosByUser(User user) {
-        return photoRepository.findByUser(user);
+    public List<Photo> getPhotosByUser(User user, Optional<String> search) {
+        if (search.isPresent()) {
+            return photoRepository.findByUserAndTitoloContainingIgnoreCaseOrDescrizioneContainingIgnoreCase(user, search.get(), search.get());
+        } else {
+            return photoRepository.findByUser(user);
+        }
     }
 
     public List<Photo> getAllPhotos(Optional<String> search) {
