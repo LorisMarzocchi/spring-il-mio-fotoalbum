@@ -11,12 +11,12 @@ INSERT INTO users_roles (user_id, roles_id) VALUES(2, 1);
 INSERT INTO users_roles (user_id, roles_id) VALUES(3, 1);
 INSERT INTO users_roles (user_id, roles_id) VALUES(4, 1);
 -- Insert photos
-INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Alba in montagna', 'Una bellissima alba vista dalla montagna', true, '2023-11-09 15:45:00', 1);
-INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Vista della città di notte', 'Panoramica notturna della città illuminata', true, '2023-11-09 15:45:00', 1);
-INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto in bianco e nero', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 1);
-INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto SDFSDF', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 1);
-INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto 123455', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 2);
-INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto DDDDDD', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 2);
+--INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Alba in montagna', 'Una bellissima alba vista dalla montagna', true, '2023-11-09 15:45:00', 1);
+--INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Vista della città di notte', 'Panoramica notturna della città illuminata', true, '2023-11-09 15:45:00', 1);
+--INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto in bianco e nero', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 1);
+--INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto SDFSDF', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 1);
+--INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto 123455', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 2);
+--INSERT INTO photos (titolo, descrizione, visible, created_at, user_id) VALUES ('Ritratto DDDDDD', 'Ritratto artistico in bianco e nero', true, '2023-11-09 15:45:00', 2);
 -- Insert categories
 INSERT INTO categories (name) VALUES ('Natura');
 INSERT INTO categories (name) VALUES ('Città');
