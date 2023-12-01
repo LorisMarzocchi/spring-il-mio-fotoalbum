@@ -37,11 +37,10 @@ const searchPhoto = () => {
 
 // Funzione per renderizzare ogni foto nell'elenco
 const renderPhoto = (element) => {
+  const imageUrl = `http://localhost:8080/files/cover/${element.id}`;
   return `
     <div class="card" style="width: 15rem;">
-        <img src="${element.urlImage}" class="card-img-top" alt="${
-    element.titolo
-  }">
+        <img src="${imageUrl}" class="card-img-top" alt="${element.titolo}">
         <div class="card-body">
             <h5 class="card-title">${element.titolo}</h5>
             <p class="card-text">${element.descrizione}</p>
