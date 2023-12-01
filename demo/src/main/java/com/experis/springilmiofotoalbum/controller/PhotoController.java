@@ -1,5 +1,6 @@
 package com.experis.springilmiofotoalbum.controller;
 
+import com.experis.springilmiofotoalbum.dto.PhotoDto;
 import com.experis.springilmiofotoalbum.exception.PhotoNotFoundException;
 import com.experis.springilmiofotoalbum.model.Photo;
 import com.experis.springilmiofotoalbum.model.User;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,7 +64,7 @@ public class PhotoController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("photo", new Photo());
+        model.addAttribute("photo", new PhotoDto());
 
 //        List<Category> categoryList = categoryService.getAll();
         model.addAttribute("categoryList", categoryService.getAll());
@@ -70,7 +72,7 @@ public class PhotoController {
     }
 
     @PostMapping("/store")
-    public String store(@AuthenticationPrincipal UserDetails userDetails, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model) {
+    public String store(@AuthenticationPrincipal UserDetails userDetails, @Valid @ModelAttribute("photo") PhotoDto formPhoto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categoryList", categoryService.getAll());
             return "photos/form";
@@ -89,6 +91,9 @@ public class PhotoController {
         } catch (RuntimeException e) {
             bindingResult.addError(new FieldError("photo", "titolo", e.getMessage(), false, null, null, "Il nome deve essere unico"));
             return "photos/form";
+        } catch (IOException e) {
+            bindingResult.addError(new FieldError("photo", "covereFile", "impossibile salvare il file"));
+            return "photos/form";
         }
     }
 
@@ -96,16 +101,18 @@ public class PhotoController {
     public String edit(@PathVariable Integer id, Model model) {
         try {
             Photo photo = photoService.getPhotoById(id);
-            model.addAttribute("photo", photo);
+            model.addAttribute("photo", photoService.getPhotoDtoById(id));
             model.addAttribute("categoryList", categoryService.getAll());
             return "photos/form";
         } catch (PhotoNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @PostMapping("/edit/{id}")
-    public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model) {
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") PhotoDto formPhoto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categoryList", categoryService.getAll());
             return "photos/form";
@@ -116,8 +123,11 @@ public class PhotoController {
 
         } catch (PhotoNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (IOException e) {
+            bindingResult.addError(new FieldError("photo", "coverFile", null, false, null, null,
+                    "Unable to save file"));
+            return "photos/form";
         }
-
     }
 
     @PostMapping("/delete/{id}")

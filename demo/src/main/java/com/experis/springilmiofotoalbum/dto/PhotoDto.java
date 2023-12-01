@@ -1,23 +1,20 @@
-package com.experis.springilmiofotoalbum.model;
+package com.experis.springilmiofotoalbum.dto;
 
+import com.experis.springilmiofotoalbum.model.Category;
+import com.experis.springilmiofotoalbum.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "photos")
-public class Photo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PhotoDto {
+
     private Integer id;
     @NotBlank(message = "il nome non puo essere vuoto")
-//    @Column(nullable = false)
     @Size(max = 100, message = "il campo non può essere minore di 5 e maggiore di 100 caratteri")
     @Column(length = 100, nullable = false, unique = true)
     private String titolo;
@@ -25,15 +22,11 @@ public class Photo {
     @Column(nullable = false)
     @Size(max = 255, message = "il campo non può essere minore di 5 maggiore di 255 caratteri")
     private String descrizione;
-    @Lob
-    @Column(length = 16777215)
-    @JsonIgnore
-    private byte[] cover;
+    private MultipartFile coverFile;
 
     @NotNull
     private boolean visible = true;
-    @CreationTimestamp
-    private LocalDateTime createdAt;
+
     //    @JoinTable(
 //            name = "photos_categories",
 //            joinColumns = @JoinColumn(name = "photos_id"),
@@ -47,12 +40,12 @@ public class Photo {
     @JsonIgnore
     private User user;
 
-    public byte[] getCover() {
-        return cover;
+    public MultipartFile getCoverFile() {
+        return coverFile;
     }
 
-    public void setCover(byte[] cover) {
-        this.cover = cover;
+    public void setCoverFile(MultipartFile coverFile) {
+        this.coverFile = coverFile;
     }
 
     public User getUser() {
@@ -94,14 +87,6 @@ public class Photo {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public List<Category> getCategories() {

@@ -11,7 +11,9 @@
               th:action="@{${actionUrl}}"
               method="POST"
               th:object="${photo}"
-              class="row gy-2 m-auto">
+              class="row gy-2 m-auto"
+              enctype="multipart/form-data"
+        >
             
             
             <div class="col-8 w-50 m-auto">
@@ -28,13 +30,17 @@
                         <!--            <textarea class="form-control" id="descrizione" th:field="*{descrizione}"-->
                         <!--                      placeholder="Inserisci la descrizione della pizza"></textarea>-->
                     </div>
+                    <div class="mb-3">
+                        <img th:if="${isEdit}" width="100" th:src="@{/files/cover/{id}(id =*{id})}"
+                             alt="current cover" class="me-2">
+                        <!--                        <img th:if="${isEdit}" width="100" th:src="@{/files/cover/{id}(id =*{id})}"-->
+                        <!--                             alt="current cover" class="me-2">-->
+                        <div
+                                th:insert="~{fragments/components :: formField('file', 'Cover image', 'coverFile')}"></div>
                     
-                    <!-- Campo per l'URL dell'immagine -->
-                    <div class="mb-3" th:insert="~{fragments/components :: formField('text', 'UrlImage', 'urlImage')}">
-                        <!--            <label for="urlImage" class="form-label">URL Immagine</label>-->
-                        <!--            <input type="text" class="form-control" id="urlImage" th:field="*{urlImage}"-->
-                        <!--                   placeholder="Inserisci l'URL dell'immagine">-->
+                    
                     </div>
+                    
                     <div class="mb-3">
                         <div class="form-check d-flex mt-2">
                             <input type="checkbox" class="form-check-input" id="visible" th:field="*{visible}">

@@ -11,8 +11,8 @@
             
             <div class="card mb-3 w-50 m-auto">
                 <img class=" p-2 card-img-top m-auto image-fluid" style="height: 300px;width: 250px;"
-                     th:src="*{urlImage}"
-                     alt="Immagine della Foto">
+                     th:src="@{/files/cover/{bookId}(bookId=*{id})}" alt="cover">
+                
                 <div class="card-body">
                     <h5 class="card-title" th:text="*{titolo}"></h5>
                     <p class="card-text" th:text="*{descrizione}"></p>
