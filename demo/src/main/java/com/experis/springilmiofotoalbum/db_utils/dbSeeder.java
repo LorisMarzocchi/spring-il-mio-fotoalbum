@@ -29,7 +29,7 @@ public class dbSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (categoryRepository.count() == 0) {
-            String[] categories = {"Natura", "Città", "Persone", "Ritratti", "Arte", "Animali"};
+            String[] categories = {"Natura", "Città", "Persone", "Ritratti", "Arte", "Animali", "Tecnologia", "Mare", "Paesaggi", "Interni", "Alba"};
             for (String nameCategory : categories) {
                 Category category = new Category();
                 category.setName(nameCategory);
@@ -46,15 +46,15 @@ public class dbSeeder implements CommandLineRunner {
             // Foto 1 Jhon (SUPER_ADMIN)
 
             // Recupero le categorie da assegnare
-            List<Category> categoryListPhoto1 = categoryRepository.findAllByName(Arrays.asList("Natura", "Persone"));
+            List<Category> categoryListPhoto1 = categoryRepository.findAllByName(Arrays.asList("Città", "Persone", "Alba"));
             // Esempio come leggere un file immagine
             ClassPathResource imgFile1 = new ClassPathResource("static/images/pexels-alex-umbelino-18812095.jpg");
             byte[] imageBytes1 = Files.readAllBytes(imgFile1.getFile().toPath());
 
             // Crea un oggetto Photo e imposta i suoi valori
             Photo photo1 = new Photo();
-            photo1.setTitolo("Alba ");
-            photo1.setDescrizione("Una bellissima alba vista dalla montagna");
+            photo1.setTitolo("Passi Urbani  ");
+            photo1.setDescrizione("Un momento tranquillo in cui la città si risveglia");
             photo1.setVisible(true);
             photo1.setCreatedAt(LocalDateTime.now());
             photo1.setCover(imageBytes1);
@@ -70,11 +70,11 @@ public class dbSeeder implements CommandLineRunner {
             ClassPathResource imgFile2 = new ClassPathResource("static/images/image_1.png");
             byte[] imageBytes2 = Files.readAllBytes(imgFile2.getFile().toPath());
 
-            List<Category> categoryListPhoto2 = categoryRepository.findAllByName(Arrays.asList("Ritratti", "Animali", "Arte"));
+            List<Category> categoryListPhoto2 = categoryRepository.findAllByName(Arrays.asList("Ritratti", "Tecnologia", "Arte"));
 
             Photo photo2 = new Photo();
-            photo2.setTitolo("Alba2 ");
-            photo2.setDescrizione("Una bellissima alba vista dalla montagnadfc");
+            photo2.setTitolo("Tecnologia e Arte");
+            photo2.setDescrizione("Quando l'arte digitale incontra l'innovazione e si fonde con il comfort domestico");
             photo2.setVisible(true);
             photo2.setCreatedAt(LocalDateTime.now());
             photo2.setCover(imageBytes2);
@@ -88,11 +88,11 @@ public class dbSeeder implements CommandLineRunner {
             ClassPathResource imgFile3 = new ClassPathResource("static/images/pexels-artūras-kokorevas-19082544.jpg");
             byte[] imageBytes3 = Files.readAllBytes(imgFile3.getFile().toPath());
 
-            List<Category> categoryListPhoto3 = categoryRepository.findAllByName(Arrays.asList("Ritratti", "Animali", "Arte"));
+            List<Category> categoryListPhoto3 = categoryRepository.findAllByName(Arrays.asList("Ritratti", "Mare", "Arte"));
 
             Photo photo3 = new Photo();
-            photo3.setTitolo("Alba3 ");
-            photo3.setDescrizione("Una bellissima alba vista dalla montagna");
+            photo3.setTitolo("Marina al Mattino ");
+            photo3.setDescrizione("Una vista pacifica delle barche che ondeggiano con il ritmo del mare.");
             photo3.setVisible(true);
             photo3.setCreatedAt(LocalDateTime.now());
             photo3.setCover(imageBytes3);
@@ -106,11 +106,11 @@ public class dbSeeder implements CommandLineRunner {
             ClassPathResource imgFile4 = new ClassPathResource("static/images/pexels-reinaldo-simoes-17990324.jpg");
             byte[] imageBytes4 = Files.readAllBytes(imgFile4.getFile().toPath());
 
-            List<Category> categoryListPhoto4 = categoryRepository.findAllByName(Arrays.asList("Ritratti", "Animali", "Arte"));
+            List<Category> categoryListPhoto4 = categoryRepository.findAllByName(Arrays.asList("Natura", "Mare", "Arte"));
 
             Photo photo4 = new Photo();
-            photo4.setTitolo("Alba4 ");
-            photo4.setDescrizione("Una bellissima alba vista dalla montagnddsa");
+            photo4.setTitolo("Costa Rocciosa ");
+            photo4.setDescrizione("Vista su una costa rocciosa battuta dalle onde del mare");
             photo4.setVisible(true);
             photo4.setCreatedAt(LocalDateTime.now());
             photo4.setCover(imageBytes4);
@@ -124,11 +124,11 @@ public class dbSeeder implements CommandLineRunner {
             ClassPathResource imgFile5 = new ClassPathResource("static/images/pexels-tony-pham-4869369.jpg");
             byte[] imageBytes5 = Files.readAllBytes(imgFile5.getFile().toPath());
 
-            List<Category> categoryListPhoto5 = categoryRepository.findAllByName(Arrays.asList("Ritratti", "Animali", "Arte", "Persone"));
+            List<Category> categoryListPhoto5 = categoryRepository.findAllByName(Arrays.asList("Ritratti", "Città", "Arte", "Persone"));
 
             Photo photo5 = new Photo();
-            photo5.setTitolo("Alba5 ");
-            photo5.setDescrizione("Una bellissima alba vista dalla montagnddsa");
+            photo5.setTitolo("Orizzonti Urbani ");
+            photo5.setDescrizione("L'architettura moderna si staglia contro il cielo azzurro, riflettendosi nelle acque tranquille del porto");
             photo5.setVisible(true);
             photo5.setCreatedAt(LocalDateTime.now());
             photo5.setCover(imageBytes5);
