@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="~{/fragments/navbar :: topNavbar('photos')}"></nav>
 <div class="container mt-4" th:object="${photo}">
-    <h1 class="mb-4">Dettaglio Foto</h1>
+    <h1 class=" text-danger mb-4">Dettagli Foto</h1>
     <a th:href="@{/photos}" class="btn btn-primary">Torna alla lista</a>
     <div class="row d-flex mt-4">
         <div class="col-6">

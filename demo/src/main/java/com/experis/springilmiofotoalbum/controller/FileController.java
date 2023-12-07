@@ -25,22 +25,45 @@ public class FileController {
     @Autowired
     private PhotoService photoService;
 
+    //    @GetMapping("cover/{photoId}")
+//    public ResponseEntity<byte[]> serveCover(@PathVariable Integer bookId) {
+//        try {
+//            // recupero il libro con quell'id
+//            Book book = bookService.getBookById(bookId);
+//            byte[] coverBytes = book.getCover();
+//            // se ha la cover la restituisco
+//            if (coverBytes != null && coverBytes.length > 0) {
+//                MediaType mediaType = MediaType.IMAGE_JPEG;
+//                // restituisco i byte[] della cover come contenuto della response
+//                return ResponseEntity.ok().contentType(mediaType).body(coverBytes);
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
+//        } catch (BookNotFoundException e) {
+//            // se non trovo il libro ritorno un HTTP 404
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//    }
     @GetMapping("cover/{photoId}")
     public ResponseEntity<byte[]> serveCover(@PathVariable Integer photoId) {
 
         try {
+            // recupero la foto con quell'id
             Photo photo = photoService.getPhotoById(photoId);
             byte[] coverBytes = photo.getCover();
+            // se ha la cover la restituisco
             if (coverBytes != null && coverBytes.length > 0) {
-
+                // MediaType mediaType = MediaType.IMAGE_JPEG;
                 MediaType mediaType = getMediaTypeForByteArray(coverBytes);
-
+                // restituisco i byte[] della cover come contenuto della response
                 return ResponseEntity.ok().contentType(mediaType).body(coverBytes);
             } else {
                 return ResponseEntity.notFound().build();
 
             }
         } catch (PhotoNotFoundException e) {
+            // se non trovo il libro ritorno un HTTP 404
             return ResponseEntity.notFound().build();
 
         }
@@ -63,7 +86,6 @@ public class FileController {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < bLength && i < bytes.length; i++) {
             builder.append(String.format("%02X", bytes[i]));
-
         }
         return builder.toString();
     }

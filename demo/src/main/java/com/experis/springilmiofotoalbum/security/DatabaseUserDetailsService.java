@@ -17,10 +17,14 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // prendo lo username che viene dalla login e cerco su db uno user con quella email
         Optional<User> loggedUser = userRepository.findByEmail(username);
         if (loggedUser.isPresent()) {
+            // c'è un utente con quella email
+            // restituisco un DatabaseUserDetails con i dati dello User
             return new DatabaseUserDetails(loggedUser.get());
         } else {
+            // non c'è un utente con quella email
             throw new UsernameNotFoundException(username);
         }
     }

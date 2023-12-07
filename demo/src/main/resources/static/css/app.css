@@ -7,8 +7,9 @@
             font-size: 0.95rem;
         }
          .imgList {
-                max-width: 80px;
-                height: auto;
+                width: 70px;
+                height: 70px;
+
                 display: block;
                 margin: auto;
         }
@@ -33,6 +34,8 @@
        }
        .nav-link {
            font-weight: bold;
+           color: white;
+
        }
         .message-cell {
             max-width: 350px;
@@ -42,7 +45,10 @@
             white-space: normal;
         }
 
-
+        nav{
+            background-color: #2F2F2F;
+            color: white !important;
+        }
 
 
 

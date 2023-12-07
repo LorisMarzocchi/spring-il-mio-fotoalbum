@@ -69,7 +69,9 @@ const renderCategory = (categories) => {
 const renderPhotoList = (data) => {
   let content = '<div class="row">';
   data.forEach((element) => {
-    content += `<div class="col-4 mt-3">${renderPhoto(element)}</div>`;
+    content += `<div class="col-4 d-flex justify-content-center mt-3">${renderPhoto(
+      element
+    )}</div>`;
   });
   content += "</div>";
   root.innerHTML = content;

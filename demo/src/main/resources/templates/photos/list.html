@@ -7,7 +7,7 @@
     <div th:replace="~{fragments/components :: message}"></div>
     <h2 class="text-danger mb-4">Lista delle Foto</h2>
     <div class="text-center">
-        <a class="btn btn-primary my-5" th:href="@{/photos/create}" title="create">Aggiungi Nuova Photo</a>
+        <a class="btn btn-primary my-5" th:href="@{/photos/create}" title="create">Aggiungi Una Nuova Photo</a>
     
     </div>
     <form th:action="@{/photos}" method="GET" class="w-25 mb-4">
@@ -20,7 +20,7 @@
                     th:value="${param.search}"
             >
             
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit">Cerca</button>
         </div>
     
     </form>
@@ -33,7 +33,7 @@
                 <th>Creato da</th>
                 <th>Titolo</th>
                 <th>Descrizione</th>
-                <th>URL Immagine</th>
+                <th>Immagine</th>
                 <th>Visibile</th>
                 <th>Data Creazione</th>
                 <th>Azioni</th>
@@ -46,7 +46,7 @@
                 <td th:text="*{titolo}"></td>
                 <td th:text="*{descrizione}"></td>
                 <td>
-                    <img class=" imgList img-fluid" th:src="@{/files/cover/{photoId}(photoId=*{id})}" alt="cover">
+                    <img class="imgList" th:src="@{/files/cover/{photoId}(photoId=*{id})}" alt="cover">
                 </td>
                 <td>
                     <!--                    <div class="form-check">-->

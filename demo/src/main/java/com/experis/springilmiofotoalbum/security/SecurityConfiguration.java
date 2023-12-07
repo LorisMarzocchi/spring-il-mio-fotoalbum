@@ -23,6 +23,7 @@ public class SecurityConfiguration {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    // configurazione dell'AuthenticationProvider
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         // creo un DaoAuthenticationProvider

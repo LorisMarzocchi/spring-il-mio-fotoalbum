@@ -27,7 +27,7 @@ public class CategoryService {
         if (categoryRepository.existsByName(category.getName())) {
             throw new CategoryNameUniqueException(category.getName());
         }
-        category.setName(category.getName().toLowerCase());
+        category.setName(category.getName()); // toLowerCase()
         return categoryRepository.save(category);
     }
 
