@@ -29,7 +29,18 @@ public class dbSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (categoryRepository.count() == 0) {
-            String[] categories = {"Natura", "Città", "Persone", "Ritratti", "Arte", "Animali", "Tecnologia", "Mare", "Paesaggi", "Interni", "Alba"};
+            String[] categories = {
+                    "Natura",
+                    "Città",
+                    "Persone",
+                    "Ritratti",
+                    "Arte",
+                    "Animali",
+                    "Tecnologia",
+                    "Mare",
+                    "Paesaggi",
+                    "Interni",
+                    "Alba"};
             for (String nameCategory : categories) {
                 Category category = new Category();
                 category.setName(nameCategory);
@@ -37,7 +48,7 @@ public class dbSeeder implements CommandLineRunner {
             }
         }
         if (photoRepository.count() == 0) {
-            // Crea un utente
+            // Richiama un utente
             User userJohn = userRepository.findById(1).orElse(null);
             User userJane = userRepository.findById(2).orElse(null);
             User userDavid = userRepository.findById(3).orElse(null);

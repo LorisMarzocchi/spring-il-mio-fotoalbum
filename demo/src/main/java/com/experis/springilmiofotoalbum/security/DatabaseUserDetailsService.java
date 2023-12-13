@@ -22,6 +22,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         if (loggedUser.isPresent()) {
             // c'è un utente con quella email
             // restituisco un DatabaseUserDetails con i dati dello User
+
             return new DatabaseUserDetails(loggedUser.get());
         } else {
             // non c'è un utente con quella email

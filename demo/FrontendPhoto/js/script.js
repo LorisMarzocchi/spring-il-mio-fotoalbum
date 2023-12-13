@@ -44,6 +44,7 @@ const renderPhoto = (element) => {
         <div class="card-body">
             <h5 class="card-title">${element.titolo}</h5>
             <p class="card-text">${element.descrizione}</p>
+
             <div class="card-footer">${renderCategory(element.categories)}</div>
         </div>
     </div>`;
